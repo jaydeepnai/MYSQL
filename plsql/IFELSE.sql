@@ -38,3 +38,15 @@ IF EXISTS (SELECT 1 FROM Employees WHERE EmployeeID = @empID)
     UPDATE Employees SET Salary = @newSalary WHERE EmployeeID = @empID;
 ELSE
     INSERT INTO Employees (EmployeeID, Name, Salary) VALUES (@empID, 'New Employee', @newSalary);
+
+
+
+
+DECLARE @Salary INT = 75000;
+
+IF @Salary > 100000
+    PRINT 'High Salary';
+ELSE IF @Salary BETWEEN 50000 AND 100000
+    PRINT 'Medium Salary';
+ELSE
+    PRINT 'Low Salary';
