@@ -81,3 +81,79 @@ select s.id, p.name as projects, e.name as employees, c.name as client from sale
 INNER join projects p on s.product_id = p.id 
 INNER join employees e on s.employee_id = e.id 
 INNER join clients c on p.client_id = c.id
+
+
+SELECT e.Name, e.Salary, d.DepartmentName
+FROM Employees e
+INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+-- ✅ Joins Employees and Departments to get department names
+
+
+SELECT o.OrderID, o.Amount, c.CustomerName
+FROM Orders o
+INNER JOIN Customers c ON o.CustomerID = c.CustomerID;
+-- ✅ Only includes orders that have a valid customer
+
+
+SELECT e.Name AS Employee, m.Name AS Manager
+FROM Employees e
+INNER JOIN Employees m ON e.ManagerID = m.EmployeeID;
+-- ✅ Self-join to get each employee’s manager
+
+
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+LEFT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+-- ✅ Includes employees even if they don’t belong to a department
+
+
+SELECT c.CustomerName, o.OrderID, o.Amount
+FROM Customers c
+LEFT JOIN Orders o ON c.CustomerID = o.CustomerID;
+-- ✅ Includes all customers, even those without orders
+
+
+SELECT e.Name 
+FROM Employees e
+LEFT JOIN Departments d ON e.DepartmentID = d.DepartmentID
+WHERE d.DepartmentID IS NULL;
+-- ✅ Finds employees with no department
+
+
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+RIGHT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+-- ✅ Includes all departments, even those without employees
+
+
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+FULL OUTER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+-- ✅ Includes employees without a department and departments without employees
+
+
+SELECT e.Name AS Employee, d.DepartmentName AS Department
+FROM Employees e
+FULL OUTER JOIN Departments d ON e.DepartmentID = d.DepartmentID
+WHERE e.EmployeeID IS NULL OR d.DepartmentID IS NULL;
+-- ✅ Finds unmatched records from both tables
+
+
+SELECT e.Name AS Employee, p.ProjectName
+FROM Employees e
+CROSS JOIN Projects p;
+-- ✅ Creates all possible combinations of employees and projects
+
+
+SELECT e1.Name AS Employee1, e2.Name AS Employee2, e1.Salary
+FROM Employees e1
+INNER JOIN Employees e2 ON e1.Salary = e2.Salary AND e1.EmployeeID <> e2.EmployeeID;
+-- ✅ Finds employees who share the same salary
+
+
+SELECT e1.Name AS Employee1, e2.Name AS Employee2, e1.DepartmentID
+FROM Employees e1
+INNER JOIN Employees e2 ON e1.DepartmentID = e2.DepartmentID AND e1.EmployeeID <> e2.EmployeeID;
+-- ✅ Finds coworkers in the same department
+
+
