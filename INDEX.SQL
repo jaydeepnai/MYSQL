@@ -1,4 +1,4 @@
--- 1. Clustered Index
+ -- 1. Clustered Index
 -- 🔹 Stores data rows in a sorted order based on the index key (only one per table).
 -- 🔹 The table itself is physically organized according to this index.
 
